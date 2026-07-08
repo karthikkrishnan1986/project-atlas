@@ -1,0 +1,21 @@
+{
+  "name": "project-atlas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "atlas": "tsx src/cli/atlas.ts",
+  "test": "playwright test",
+  "test:ui": "playwright test --ui",
+  "report": "playwright show-report"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.0",
+    "tsx": "^4.23.0"
+  }
+}
