@@ -1,10 +1,14 @@
+import { PlaywrightEngine } from "../../core/playwright/playwright-engine";
+
 export class ExecutionAgent {
 
     async execute(): Promise<void> {
 
         console.log("🎭 Playwright Execution Agent Started");
 
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        const engine = new PlaywrightEngine();
+
+        await engine.execute();
 
         console.log("✅ Playwright execution completed");
 
