@@ -1,35 +1,66 @@
 import { ReportEngine } from "../../core/reporting/report-engine";
-import { OllamaProvider } from "../../core/ai/ollama-provider";
+import { AnalysisAgent } from "../analysis/analysis-agent";
+import { ExecutionResult } from "../../models/execution-result";
 
 export class ReportingAgent {
 
     async execute(): Promise<void> {
 
+        console.log("");
         console.log("📊 Report Agent Started");
+        console.log("");
 
-        const provider = new OllamaProvider();
+        const result: ExecutionResult = {
 
-        const summary = await provider.generate(`
-You are a QA Automation Lead.
+            status: "PASS",
 
-Summarize this execution.
+            browser: "Chromium",
 
-Execution Status: PASS
+            url: "https://playwright.dev",
 
-Browser: Chromium
+            duration: 3.6,
 
-URL: https://playwright.dev
+            screenshot: "homepage.png",
 
-Screenshot: Captured
+            consoleErrors: 0,
 
-Console Errors: None
+            networkFailures: 0
 
-Keep the response under 100 words.
-`);
+        };
 
-        const report = new ReportEngine();
+        const analysis = new AnalysisAgent();
+const summary = await analysis.analyze(result);
 
-        report.generate(summary);
+// -------------------------
+// Simulated Failure Analysis
+// -------------------------
+
+const investigation = await analysis.investigateFailure({
+
+    errorType: "LocatorTimeout",
+
+    locator: "#login-button",
+
+    errorMessage:
+        "Timeout 30000ms exceeded. Locator '#login-button' not found.",
+
+    pageUrl: "https://playwright.dev"
+
+});
+
+console.log("");
+console.log("========== AI FAILURE INVESTIGATION ==========");
+console.log(investigation);
+console.log("==============================================");
+
+// -------------------------
+
+const report = new ReportEngine();
+
+report.generate(summary);
+
+
+        console.log("");
 
         console.log("✅ Reporting Complete");
 
